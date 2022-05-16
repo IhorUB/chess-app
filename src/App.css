@@ -1,3 +1,12 @@
+:root {
+  --cell-width: 94px;
+  --cell-height: 94px;
+  --clr-white: #eed4ac;
+  --clr-black: #7fa650;
+  --clr-yellow: yellow;
+  --clr-lightgray:  lightgray;
+} 
+
 * {
   margin: 0;
   padding: 0;
@@ -12,38 +21,45 @@
 }
 
 .board {
-  width: calc(64px * 8);
-  height: calc(64px * 8);
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-rows: repeat(8hr 1);
+  grid-template-columns: repeat(8, auto);
 }
+
 .cell {
-  width: 64px;
-  height: 64px;
+  width: var(--cell-width);
+  height: var(--cell-height);
   display: flex;
   justify-content: center;
   align-items: center;
 }
+
 .cell img {
-  width: 48px;
-  height: 48px;
+  width: var(--cell-width);
+  height: auto;
+  object-fit: contain;
   position: relative;
+  cursor: pointer;
 }
+
 .black {
-  background-color: deepskyblue;
+  background-color: var(--clr-black);
 }
+
 .white {
-  background-color: #eed4ac;
+  background-color: var(--clr-white);
 }
 
 .selected {
-  background-color: brown;
+  background-color: var(--clr-yellow);
 }
+
 .available {
-  height: 12px;
-  width: 12px;
+  height: 1.5em;
+  width: 1.5em;
   border-radius: 50%;
-  background-color: #22c022;
+  opacity: .8;
+  background-color: var(--clr-lightgray);
 }
 
 .lost {

@@ -25,7 +25,7 @@ export class Figure {
         this.cell.figure = this;
         this.logo = null;
         this.name = FigureNames.PIECE;
-        this.id = Number(Math.random().toString(36).substr(2, 9));
+        this.id = Math.floor(Math.random() * Math.floor(Math.random() * Date.now()));
     }
 
     canMove(target: Cell): boolean {

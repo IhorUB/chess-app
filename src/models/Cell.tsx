@@ -19,6 +19,6 @@ export class Cell {
         this.color = color;
         this.figure = figure;
         this.available = false;
-        this.id = Number(Math.random().toString(36).substr(2, 9));
+        this.id = Math.floor(Math.random() * Math.floor(Math.random() * Date.now()));
     }
 }    

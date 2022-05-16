@@ -9,6 +9,6 @@ export class Queen extends Figure {
     constructor(color: Colors, cell: Cell) {
         super(color, cell);
         this.logo = color === Colors.WHITE ? whiteLogo : blackLogo;
-        this.name = FigureNames.BISHOP;
+        this.name = FigureNames.QUEEN;
     }
 }
