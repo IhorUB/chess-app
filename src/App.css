@@ -5,6 +5,7 @@
   --clr-black: #7fa650;
   --clr-yellow: yellow;
   --clr-lightgray:  lightgray;
+  --clr-brown: brown;
 } 
 
 * {
@@ -48,6 +49,10 @@
 
 .white {
   background-color: var(--clr-white);
+}
+
+.brown {
+  background-color: var(--clr-brown);
 }
 
 .selected {

@@ -1,4 +1,4 @@
-import React, { cloneElement, FC, useState } from "react";
+import React, { cloneElement, FC, useEffect, useState } from "react";
 import { Board } from "../models/Board";
 import { Cell } from "../models/Cell";
 import CellComponent from "./CellComponent";
@@ -11,10 +11,27 @@ interface BoardProps {
 const BoardComponent: FC<BoardProps> = ({ board, setBoard }) => {
     const [selectedCell, setSelectedCell] = useState<Cell | null>(null);
 
-    function onCellClick(cell: Cell) {
-        if (cell.figure) setSelectedCell(cell); 
+    useEffect(() => {
+        highlightCells();
+    }, [selectedCell])
+
+    function highlightCells() {
+        board.highlightCells(selectedCell);
+        updateBoard();
     }
-    
+
+    function updateBoard() {
+        const newBoard = board.copyBoard();
+        setBoard(newBoard);
+    }
+
+    function onCellClick(cell: Cell) {
+        if (selectedCell && selectedCell !== cell && selectedCell.figure?.canMove(cell)) {
+            selectedCell.moveFigure(cell);
+            setSelectedCell(null);
+        } else setSelectedCell(cell);
+    }
+
     return (
         <div className='board'>
             {board.cells.map((row, index) =>

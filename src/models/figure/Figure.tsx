@@ -13,14 +13,14 @@ export enum FigureNames {
   }
 
 export class Figure {
-    colors: Colors;
+    color: Colors;
     logo: typeof logo | null;
     cell: Cell;
     name: FigureNames;
     id: number;
 
     constructor(color: Colors, cell: Cell) {
-        this.colors = color;
+        this.color = color;
         this.cell = cell;
         this.cell.figure = this;
         this.logo = null;
@@ -29,6 +29,8 @@ export class Figure {
     }
 
     canMove(target: Cell): boolean {
+        if(target.figure?.color === this.color) return false;
+        if(target.figure?.name === FigureNames.KING) return false;
         return true;
     }
 
