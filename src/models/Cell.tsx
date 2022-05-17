@@ -40,13 +40,13 @@ export class Cell {
     }
 
     isEmptyHorizontal(target: Cell): boolean {
-        if(target.y !== this.y) return false;
+        if (target.y !== this.y) return false;
         const min = Math.min(target.x, this.x);
         const max = Math.max(target.x, this.x);
 
-        for(let x = min + 1; x < max; x++) {
+        for (let x = min + 1; x < max; x++) {
             const isHorizontalCellEmpty = this.board.getCell(x, this.y).isEmpty();
-            if(!isHorizontalCellEmpty) return false;
+            if (!isHorizontalCellEmpty) return false;
         }
         return true;
     }
@@ -54,8 +54,17 @@ export class Cell {
     isEmptyDiagonal(target: Cell): boolean {
         const absX = Math.abs(target.x - this.x);
         const absY = Math.abs(target.y - this.y);
-        if(absX !== absY) return false;
-        //TODO: diagonal logic 
+
+        if (absX !== absY) return false;
+
+        const directionY = this.y < target.y ? 1 : -1;
+        const directionX = this.x < target.x ? 1 : -1;
+
+        for (let i = 1; i < absY; i++) {
+            const isDiagonalCellEmpty = this.board.getCell(this.x + directionX * i, this.y + directionY * i).isEmpty();
+            if (!isDiagonalCellEmpty) return false;
+        }
+
         return true;
     }
 
