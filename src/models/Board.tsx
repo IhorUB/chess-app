@@ -9,7 +9,7 @@ import { Rook } from "./figure/Rook";
 
 export class Board {
     cells: Cell[][] = [];
-    
+
     public initCells() {
         for (let i = 0; i < 8; i++) {
             const row: Cell[] = []
@@ -22,9 +22,9 @@ export class Board {
     }
 
     public highlightCells(selectedCell: Cell | null) {
-        for(let i = 0; i < this.cells.length; i++) {
+        for (let i = 0; i < this.cells.length; i++) {
             const row = this.cells[i];
-            for(let j = 0; j < row.length; j++) {
+            for (let j = 0; j < row.length; j++) {
                 const currentCell = row[j];
                 currentCell.available = !!selectedCell?.figure?.canMove(currentCell);
             }
