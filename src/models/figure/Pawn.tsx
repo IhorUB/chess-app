@@ -29,7 +29,7 @@ export class Pawn extends Figure {
         const isEnemy = this.cell.isEnemy(target);
         const canPawnAttack = target.x === this.cell.x + 1 || target.x === this.cell.x - 1;
 
-        if ((isDefaultMove || this.isFirstMove && isFirstMoveStep) && isVerticalMove && isTargetEmpty) return true;
+        if ((isDefaultMove || (this.isFirstMove && isFirstMoveStep)) && isVerticalMove && isTargetEmpty) return true;
 
         if (isDefaultMove && canPawnAttack && isEnemy) return true;
 
