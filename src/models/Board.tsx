@@ -1,6 +1,7 @@
 import { Cell } from "./Cell";
 import { Colors } from "./Colors";
 import { Bishop } from "./figure/Bishop";
+import { Figure } from "./figure/Figure";
 import { King } from "./figure/King";
 import { Knight } from "./figure/Knight";
 import { Pawn } from "./figure/Pawn";
@@ -9,12 +10,15 @@ import { Rook } from "./figure/Rook";
 
 export class Board {
     cells: Cell[][] = [];
+    lostBlackFigures: Figure[] = [];
+    lostWhiteFigures: Figure[] = [];
 
     public initCells() {
         for (let i = 0; i < 8; i++) {
-            const row: Cell[] = []
+            const row: Cell[] = [];
             for (let j = 0; j < 8; j++) {
-                (i + j) % 2 === 0 ? row.push(new Cell(this, j, i, Colors.WHITE, null))
+                (i + j) % 2 === 0
+                    ? row.push(new Cell(this, j, i, Colors.WHITE, null))
                     : row.push(new Cell(this, j, i, Colors.BLACK, null));
             }
             this.cells.push(row);
@@ -34,11 +38,19 @@ export class Board {
     public copyBoard(): Board {
         const newBoard = new Board();
         newBoard.cells = this.cells;
+        newBoard.lostBlackFigures = this.lostBlackFigures;
+        newBoard.lostWhiteFigures = this.lostWhiteFigures;
         return newBoard;
     }
 
     public getCell(x: number, y: number) {
         return this.cells[y][x];
+    }
+
+    public addLostFigure(figure: Figure) {
+        figure.color === Colors.BLACK
+            ? this.lostBlackFigures.push(figure)
+            : this.lostWhiteFigures.push(figure);
     }
 
     private addPawns() {
